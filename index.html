@@ -70,7 +70,17 @@ document.querySelector("form").addEventListener("submit", function(e) {
     message.style.color = "green";
 
 });
+let inputs = document.querySelectorAll("input");
 
+inputs.forEach(function(input){
+
+input.addEventListener("input", function(){
+
+input.style.border = "2px solid green";
+
+});
+
+});
 </script>
 
 </body>
