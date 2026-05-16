@@ -4,7 +4,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 20px;
 }
 
 .container{
@@ -30,8 +31,14 @@ input{
     border-radius: 10px;
     font-size: 16px;
     transition: 0.3s;
+    box-sizing: border-box;
 }
 
+input:focus{
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 8px rgba(37,99,235,0.5);
+}
 
 button{
     background: linear-gradient(to right, #2563eb, #7c3aed);
@@ -49,13 +56,18 @@ button:hover{
     transform: scale(1.05);
 }
 
-input:focus{
-    border: 2px solid blue;
-    border-color: #2563eb;
-    outline: none;
-    box-shadow: 0 0 8px rgba(37,99,235,0.5);
+#message{
+    margin-top: 15px;
+    font-weight: bold;
 }
 
+#result{
+    margin-top: 20px;
+    background: #f3f4f6;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+}
 
 @keyframes fadeIn{
     from{

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cognifyz Task 1</title>
+    <title>Cognifyz Task 4</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,7 +11,7 @@
 
     <h1>Student Registration Form</h1>
 
-    <form >
+    <form id="studentForm">
 
         <input type="text" name="name" placeholder="👤 Enter Name" required>
 
@@ -31,56 +31,94 @@
 
         <p id="message"></p>
 
+        <div id="result"></div>
+
     </form>
 
 </div>
+
 <script>
 
-document.querySelector("form").addEventListener("submit", function(e) {
+document.getElementById("studentForm").addEventListener("submit", function(e){
 
     e.preventDefault();
 
+    let name = document.querySelector('input[name="name"]').value;
+
+    let email = document.querySelector('input[name="email"]').value;
+
+    let course = document.querySelector('input[name="course"]').value;
+
     let password = document.querySelector('input[name="password"]').value;
 
-    let confirmPassword = document.querySelector("#confirmPassword").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
 
     let phone = document.querySelector('input[name="phone"]').value;
 
-    let message = document.querySelector("#message");
+    let age = document.querySelector('input[name="age"]').value;
 
+    let message = document.getElementById("message");
+
+    let result = document.getElementById("result");
+
+
+
+    // Password validation
     if(password.length < 6){
+
         message.innerHTML = "Password must be at least 6 characters";
+
         message.style.color = "red";
+
         return;
     }
 
+    // Phone validation
     if(phone.length !== 10){
+
         message.innerHTML = "Phone number must be 10 digits";
+
         message.style.color = "red";
+
         return;
     }
 
+    // Confirm password validation
     if(password !== confirmPassword){
+
         message.innerHTML = "Passwords do not match";
+
         message.style.color = "red";
+
         return;
     }
 
+    // Success message
     message.innerHTML = "Form Submitted Successfully!";
+
     message.style.color = "green";
 
+
+
+    // Dynamic DOM Manipulation
+    result.innerHTML = `
+
+        <h3>Submitted Data</h3>
+
+        <p><b>Name:</b> ${name}</p>
+
+        <p><b>Email:</b> ${email}</p>
+
+        <p><b>Course:</b> ${course}</p>
+
+        <p><b>Phone:</b> ${phone}</p>
+
+        <p><b>Age:</b> ${age}</p>
+
+    `;
+
 });
-let inputs = document.querySelectorAll("input");
 
-inputs.forEach(function(input){
-
-input.addEventListener("input", function(){
-
-input.style.border = "2px solid green";
-
-});
-
-});
 </script>
 
 </body>

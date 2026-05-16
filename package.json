@@ -9,8 +9,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "This is Task 1 of my Web Development Internship at Cognifyz Technologies.",
   "dependencies": {
     "express": "^5.2.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sharanya-25250198/COGNIFYZ_TASK1.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sharanya-25250198/COGNIFYZ_TASK1/issues"
+  },
+  "homepage": "https://github.com/sharanya-25250198/COGNIFYZ_TASK1#readme"
 }
