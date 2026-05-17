@@ -1,9 +1,11 @@
 const express = require("express");
+const morgan = require("morgan");
 const mongoose = require("mongoose");
 
 const app = express();
 
 app.use(express.json());
+app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 
@@ -89,4 +91,10 @@ app.post("/login", async (req, res) => {
 
     }
 
+});
+app.use((err, req, res, next) => {
+
+    console.error(err.stack);
+
+    res.status(500).send("Something broke!");
 });
