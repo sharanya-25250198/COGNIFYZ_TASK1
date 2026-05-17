@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cognifyz Task 4</title>
+    <title>Student Registration Form</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,109 +13,88 @@
 
     <form id="studentForm">
 
-        <input type="text" name="name" placeholder="👤 Enter Name" required>
+        <input type="text" id="name" placeholder="👤 Enter Name" required>
 
-        <input type="email" name="email" placeholder="📧 Enter Email" required>
+        <input type="email" id="email" placeholder="📧 Enter Email" required>
 
-        <input type="text" name="course" placeholder="📘 Enter Course" required>
+        <input type="text" id="course" placeholder="📘 Enter Course" required>
 
-        <input type="password" name="password" placeholder="🔒 Enter Password" required>
+        <input type="password" id="password" placeholder="🔒 Enter Password" required>
 
         <input type="password" id="confirmPassword" placeholder="🔐 Confirm Password" required>
 
-        <input type="text" name="phone" placeholder="📱 Enter Phone Number" required>
+        <input type="text" id="phone" placeholder="📱 Enter Phone Number" required>
 
-        <input type="number" name="age" placeholder="🎂 Enter Age" required>
+        <input type="number" id="age" placeholder="🎂 Enter Age" required>
 
         <button type="submit">Submit</button>
 
-        <p id="message"></p>
-
-        <div id="result"></div>
-
     </form>
+
+    <p id="message"></p>
 
 </div>
 
 <script>
 
-document.getElementById("studentForm").addEventListener("submit", function(e){
+document.getElementById("studentForm").addEventListener("submit", async function(e){
 
     e.preventDefault();
 
-    let name = document.querySelector('input[name="name"]').value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
 
-    let email = document.querySelector('input[name="email"]').value;
+    const message = document.getElementById("message");
 
-    let course = document.querySelector('input[name="course"]').value;
-
-    let password = document.querySelector('input[name="password"]').value;
-
-    let confirmPassword = document.getElementById("confirmPassword").value;
-
-    let phone = document.querySelector('input[name="phone"]').value;
-
-    let age = document.querySelector('input[name="age"]').value;
-
-    let message = document.getElementById("message");
-
-    let result = document.getElementById("result");
-
-
-
-    // Password validation
-    if(password.length < 6){
-
-        message.innerHTML = "Password must be at least 6 characters";
-
-        message.style.color = "red";
-
-        return;
-    }
-
-    // Phone validation
-    if(phone.length !== 10){
-
-        message.innerHTML = "Phone number must be 10 digits";
-
-        message.style.color = "red";
-
-        return;
-    }
-
-    // Confirm password validation
     if(password !== confirmPassword){
 
-        message.innerHTML = "Passwords do not match";
-
+        message.innerHTML = "Incorrect Password!";
         message.style.color = "red";
-
         return;
     }
 
-    // Success message
-    message.innerHTML = "Form Submitted Successfully!";
+    const formData = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        course: document.getElementById("course").value,
+        password: password,
+        confirmPassword: confirmPassword,
+        phone: document.getElementById("phone").value,
+        age: document.getElementById("age").value
+    };
 
-    message.style.color = "green";
+    try {
 
+        const response = await fetch("/submit", {
 
+            method: "POST",
 
-    // Dynamic DOM Manipulation
-    result.innerHTML = `
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-        <h3>Submitted Data</h3>
+            body: JSON.stringify(formData)
 
-        <p><b>Name:</b> ${name}</p>
+        });
 
-        <p><b>Email:</b> ${email}</p>
+        const data = await response.json();
 
-        <p><b>Course:</b> ${course}</p>
+        if(response.ok){
 
-        <p><b>Phone:</b> ${phone}</p>
+            message.innerHTML = "Form Submitted Successfully!";
+            message.style.color = "green";
 
-        <p><b>Age:</b> ${age}</p>
+        } else {
 
-    `;
+            message.innerHTML = "Error Saving Data!";
+            message.style.color = "red";
+        }
+
+    } catch(error){
+
+        message.innerHTML = "Server Error!";
+        message.style.color = "red";
+    }
 
 });
 

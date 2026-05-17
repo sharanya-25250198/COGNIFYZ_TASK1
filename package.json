@@ -11,7 +11,11 @@
   "license": "ISC",
   "description": "This is Task 1 of my Web Development Internship at Cognifyz Technologies.",
   "dependencies": {
-    "express": "^5.2.1"
+    "bcryptjs": "^3.0.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^7.2.0",
+    "mongoose": "^9.6.2"
   },
   "repository": {
     "type": "git",
