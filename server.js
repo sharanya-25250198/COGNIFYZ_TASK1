@@ -50,5 +50,43 @@ app.post("/submit", async (req, res) => {
         });
 
     }
+});
+app.post("/login", async (req, res) => {
+
+    try {
+
+        const { email, password } = req.body;
+
+        const user = await Student.findOne({ email: email });
+
+        if (!user) {
+
+            return res.json({
+                message: "User Not Found"
+            });
+
+        }
+
+        if (user.password !== password) {
+
+            return res.json({
+                message: "Incorrect Password"
+            });
+
+        }
+
+        res.json({
+            message: "Login Successful"
+        });
+
+    }
+
+    catch (error) {
+
+        res.json({
+            message: "Error Occurred"
+        });
+
+    }
 
 });
